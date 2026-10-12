@@ -1,0 +1,21 @@
+{
+  "name": "saas-marketing",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node -e \"require('fs').cpSync('out', 'Netlify-Upload', {recursive: true}); require('fs').writeFileSync('Netlify-Upload/_redirects', '/* /index.html 200\\n')\"",
+    "start": "next start"
+  },
+  "dependencies": {
+    "framer-motion": "^12.4.7",
+    "lucide-react": "^0.476.0",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
+}

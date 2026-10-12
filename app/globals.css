@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --glass-bg: rgba(255,255,255,.72);
+    --glass-border: 1px solid rgba(255,255,255,.9);
+    --hero-glow: radial-gradient(60% 45% at 0% 100%, rgba(255,255,255,.55), transparent 70%),
+                 radial-gradient(60% 45% at 100% 100%, rgba(255,255,255,.55), transparent 70%);
+  }
+
+  body {
+    @apply bg-page text-ink antialiased;
+    font-family: var(--font-sans), 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    background-image: 
+      linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(37,99,235,.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .hero-container {
+    @apply bg-hero relative overflow-hidden rounded-hero mx-4 lg:mx-auto max-w-[1400px];
+  }
+  .hero-container::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: var(--hero-glow);
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 24px 60px -12px rgba(37,99,235,.18), 0 2px 6px rgba(15,30,80,.04);
+    will-change: transform, opacity;
+  }
+  @media (max-width: 768px) {
+    .glass-card {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 12px 28px -8px rgba(37,99,235,.18), 0 1px 3px rgba(15,30,80,.04);
+    }
+  }
+
+  .connector-line {
+    @apply hidden md:block absolute top-1/2 -translate-y-1/2 h-[1px];
+    background: linear-gradient(90deg, transparent, #A9C8FF, transparent);
+  }
+  .connector-line::after, .connector-line::before {
+    content: '';
+    @apply absolute top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-blue-300;
+  }
+  .connector-line::before { left: 0; }
+  .connector-line::after { right: 0; }
+
+  /* Buttons */
+  .btn-blue {
+    @apply bg-btn-blue text-white rounded-field h-11 px-6 inline-flex items-center justify-center font-medium shadow-md hover:opacity-90 transition-opacity whitespace-nowrap;
+  }
+  .btn-navy {
+    @apply bg-navy-900 text-white rounded-full h-11 px-6 inline-flex items-center justify-center font-medium shadow hover:opacity-90 transition-opacity whitespace-nowrap;
+  }
+  .btn-white {
+    @apply bg-white text-navy-900 rounded-field h-11 px-6 inline-flex items-center justify-center font-medium shadow-card hover:bg-gray-50 transition-colors whitespace-nowrap;
+  }
+  .btn-text {
+    @apply text-blue-600 text-[13px] font-medium inline-flex items-center hover:underline;
+  }
+
+  /* Typography specs */
+  h1 { @apply text-[28px] sm:text-[36px] lg:text-[56px] font-medium leading-[1.15] tracking-[-0.02em]; }
+  h2 { @apply text-[24px] sm:text-[28px] lg:text-[44px] font-medium leading-[1.15] tracking-[-0.02em]; }
+  .card-title { @apply text-[16px] lg:text-[18px] font-semibold leading-[1.3] tracking-[-0.01em]; }
+  .card-number { @apply text-[24px] lg:text-[28px] font-semibold leading-[1.1] tracking-[-0.02em]; }
+  
+  .badge-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-gray-200 rounded-full text-[11px] lg:text-[12px] font-medium text-navy-700 shadow-sm;
+  }
+  
+  .glass-chip {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 bg-white/70 backdrop-blur-md border border-white/90 rounded-full shadow-sm text-[11px] text-navy-900 font-medium;
+  }
+}
